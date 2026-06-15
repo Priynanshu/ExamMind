@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import { useSelector } from "react-redux";
 import { motion } from "framer-motion";
 import {
   Brain, MessageSquare, TrendingUp, ArrowRight,
@@ -20,6 +21,7 @@ const item = {
 };
 
 const LandingPage = () => {
+  const { user } = useSelector((state) => state.auth);
   const features = [
     {
       icon: Brain,
@@ -114,14 +116,23 @@ const LandingPage = () => {
 
           {/* CTA Buttons */}
           <motion.div variants={item} className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Link to="/register"
-              className="btn-primary inline-flex items-center justify-center gap-2 text-base px-8 py-4 rounded-xl glow">
-              Start Learning Free <ArrowRight size={18} />
-            </Link>
-            <Link to="/login"
-              className="btn-ghost inline-flex items-center justify-center gap-2 text-base px-8 py-4 rounded-xl">
-              Already a student? Login
-            </Link>
+            {user ? (
+              <Link to="/dashboard"
+                className="btn-primary inline-flex items-center justify-center gap-2 text-base px-8 py-4 rounded-xl glow">
+                Go to Dashboard <ArrowRight size={18} />
+              </Link>
+            ) : (
+              <>
+                <Link to="/register"
+                  className="btn-primary inline-flex items-center justify-center gap-2 text-base px-8 py-4 rounded-xl glow">
+                  Start Learning Free <ArrowRight size={18} />
+                </Link>
+                <Link to="/login"
+                  className="btn-ghost inline-flex items-center justify-center gap-2 text-base px-8 py-4 rounded-xl">
+                  Already a student? Login
+                </Link>
+              </>
+            )}
           </motion.div>
 
           {/* Stats */}
@@ -261,10 +272,17 @@ const LandingPage = () => {
           <p className="mb-8" style={{ color: "var(--text-muted)" }}>
             Join thousands of students who stopped mugging and started understanding.
           </p>
-          <Link to="/register"
-            className="btn-primary inline-flex items-center gap-2 text-base px-8 py-4 rounded-xl glow">
-            Start for Free <ArrowRight size={18} />
-          </Link>
+          {user ? (
+            <Link to="/dashboard"
+              className="btn-primary inline-flex items-center gap-2 text-base px-8 py-4 rounded-xl glow">
+              Go to Dashboard <ArrowRight size={18} />
+            </Link>
+          ) : (
+            <Link to="/register"
+              className="btn-primary inline-flex items-center gap-2 text-base px-8 py-4 rounded-xl glow">
+              Start for Free <ArrowRight size={18} />
+            </Link>
+          )}
           <div className="flex items-center justify-center gap-4 mt-6 text-sm"
             style={{ color: "var(--text-muted)" }}>
             <div className="flex items-center gap-1.5"><CheckCircle size={14} className="text-green-400" /> No credit card</div>
@@ -276,7 +294,7 @@ const LandingPage = () => {
 
       {/* Footer */}
       <footer className="border-t py-8 text-center text-sm" style={{ borderColor: "var(--border)", color: "var(--text-muted)" }}>
-        <p>© 2024 ExamMind. Built with ❤️ for Indian students.</p>
+        <p>© 2026 ExamMind. Built with Love for Indian students.</p>
       </footer>
     </div>
   );
