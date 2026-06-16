@@ -94,9 +94,9 @@ const Navbar = () => {
                 <div className="w-6 h-6 rounded-full bg-indigo-500 flex items-center justify-center text-white text-xs font-bold">
                   {user.name?.[0]?.toUpperCase()}
                 </div>
-                <span className="text-sm font-medium" style={{ color: "var(--text)" }}>
+                <Link to={"/profile"} className="text-sm font-medium" style={{ color: "var(--text)" }}>
                   {user.name?.split(" ")[0]}
-                </span>
+                </Link>
               </div>
 
               {/* Logout */}
